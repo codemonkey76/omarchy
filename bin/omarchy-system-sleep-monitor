@@ -59,8 +59,8 @@ preparing_for_sleep() {
 # a Restart. That restart lands while logind is still working through the sleep
 # operation, and logind refuses a delay inhibitor for an operation already in
 # flight: systemd-inhibit exits 1 and Restart tries again RestartSec later.
-# The retries burn StartLimitBurst, and tripping it leaves the unit failed --
-# so the next suspend gets no lock at all. Wait the operation out instead.
+# Each refusal is a failed start, and the retries go on for as long as the
+# operation does. Wait the operation out instead.
 wait_for_sleep_operation() {
   local waited_ms=0
 

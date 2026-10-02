@@ -114,7 +114,7 @@ pass "sleep monitor cleans up its producer when terminated"
 
 # A restart that lands while logind is still working through a sleep operation
 # cannot take a delay inhibitor. The monitor must wait the operation out rather
-# than exiting 1 and burning through the unit's StartLimitBurst.
+# than exiting 1 into another restart.
 busctl_calls="$tmpdir/busctl-calls"
 inhibit_marker="$tmpdir/inhibit-marker"
 rm -f "$busctl_calls" "$inhibit_marker" "$producer_pid_file" "$lock_log"
