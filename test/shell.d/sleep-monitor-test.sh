@@ -32,6 +32,12 @@ printf '   boolean true\n'
 exec sleep 30
 SH
 
+cat >"$mock_bin/busctl" <<'SH'
+#!/bin/bash
+
+echo "b false"
+SH
+
 cat >"$mock_omarchy/bin/omarchy-system-sleep-lock" <<'SH'
 #!/bin/bash
 
@@ -41,6 +47,7 @@ SH
 chmod +x \
   "$mock_bin/systemd-inhibit" \
   "$mock_bin/dbus-monitor" \
+  "$mock_bin/busctl" \
   "$mock_omarchy/bin/omarchy-system-sleep-lock"
 ln -s "$sleep_monitor" "$mock_omarchy/bin/omarchy-system-sleep-monitor"
 
